@@ -1,0 +1,21 @@
+name: 'Build Number Maintainer'
+description: 'Generate custom sequential build number and persist within the repository through tags'
+author: 'Sudhir Nakka'
+runs:
+  using: 'node12'
+  main: 'main.js'
+inputs:
+  token:
+    description: 'GitHub Token to create and delete tag refs (GITHUB_TOKEN)'
+    required: false # Not required when getting the stored build number for later jobs, only in the first jobs when it's generated
+  prefix:
+    description: 'Prefix for the build-number-<num> tag to make it unique if tracking multiple build numbers. eg: releasename-'
+    required: false
+
+outputs:
+  build_number:
+    description: 'Generated build number'
+
+branding:
+  icon: 'hash'
+  color: 'green'

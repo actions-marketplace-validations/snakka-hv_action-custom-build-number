@@ -55,7 +55,10 @@ function request(method, path, data, callback) {
 
 function main() {
     const path = 'BUILD_NUMBER/BUILD_NUMBER';
-    const prefix = env.INPUT_PREFIX ? `${env.INPUT_PREFIX}-` : '';
+    let prefix = env.INPUT_PREFIX ? `${env.INPUT_PREFIX}-` : '';
+    if (prefix.startsWith("refs/")) {
+        prefix = prefix.replace("refs", "pr");
+    }
 
     //See if we've already generated the build number and are in later steps...
     if (fs.existsSync(path)) {
